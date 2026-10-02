@@ -5,7 +5,6 @@ const server = http.createServer(async (req, res) => {
 
     // GET products
     if (req.method === "GET" && req.url === "/product") {
-
         const result = await pool.query("SELECT * FROM products");
 
         res.writeHead(200, {
@@ -18,7 +17,6 @@ const server = http.createServer(async (req, res) => {
 
     // POST order
     if (req.method === "POST" && req.url === "/orders") {
-
         let body = "";
 
         req.on("data", chunk => {
@@ -26,11 +24,8 @@ const server = http.createServer(async (req, res) => {
         });
 
         req.on("end", async () => {
-
             try {
-
                 const data = JSON.parse(body);
-
                 const userId = data.user_id;
                 const items = data.items;
 
@@ -75,7 +70,6 @@ const server = http.createServer(async (req, res) => {
             } catch (error) {
 
                 console.log(error);
-
                 res.writeHead(500, {
                     "Content-Type": "application/json"
                 });
